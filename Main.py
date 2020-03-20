@@ -2,7 +2,7 @@ import Drone
 import socket
 import time
 
-voresDrone = Drone.Drone("192.168.10.1", 8889)
+voresDrone = Drone.Drone("127.0.0.1", 8889)
 
 voresDrone.connect()
 time.sleep(2)

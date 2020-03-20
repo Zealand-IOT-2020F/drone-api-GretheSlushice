@@ -2,10 +2,12 @@ import socket
 
 class Drone(object):
     """description of class"""
-    def __init__(self, host, port):
-        self.host = host
+    def __init__(self, ip, port):
+        self.ip = ip
         self.port = port
-        self.locaddr = (host, port)
+        self.Host = ''
+        self.HostPort = 9000
+        self.locaddr = (self.Host, self.HostPort)
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.tello_address = ("192.168.10.1", 8889)
         self.sock.bind(self.locaddr)
@@ -21,6 +23,7 @@ class Drone(object):
             return "Succes"
         except:
             return "Did not work"
+
         
 
     def connect(self):
@@ -34,22 +37,22 @@ class Drone(object):
         print(resultat)
 
     def forward(self, value):
-        print("frem")
+        print("frem "+value)
         resultat = self.sendBesked("foward "+value)
         print(resultat)
 
     def back(self, value):
-        print("tilbage")
+        print("tilbage "+value)
         resultat = self.sendBesked("back "+value)
         print(resultat)
     
     def left(self, value):
-        print("venstre")
+        print("venstre "+value)
         resultat = self.sendBesked("left "+value)
         print(resultat)
 
     def right(self, value):
-        print("hojre")
+        print("hojre "+value)
         resultat = self.sendBesked("right "+value)
         print(resultat)
 
@@ -59,12 +62,12 @@ class Drone(object):
         print(resultat)
     
     def turn_cw(self, value):
-        print("drejer med uret")
+        print("drejer med uret "+value)
         resultat = self.sendBesked("cw "+value)
         print(resultat)
 
     def turn_ccw(self, value):
-        print("drejer mod uret")
+        print("drejer mod uret "+value)
         resultat = self.sendBesked("ccw"+value)
         print(resultat)
 
