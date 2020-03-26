@@ -5,21 +5,22 @@ class Drone(object):
     def __init__(self, ip, port):
         self.ip = ip
         self.port = port
-        self.Host = ''
+        self.Host = ""
         self.HostPort = 9000
         self.locaddr = (self.Host, self.HostPort)
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        self.tello_address = ("192.168.10.1", 8889)
+        #self.tello_address = ("192.168.10.1", 8889)
+        self.tello_address = (ip, port)
         self.sock.bind(self.locaddr)
 
     def sendBesked(self,TelloMessage):
         try:   
-            #print("send message "+ TelloMessage +" end")
+            print("send message "+ TelloMessage +" end")
             msg = TelloMessage.encode(encoding="utf-8")
             sent = self.sock.sendto(msg, self.tello_address)
             data, server = self.sock.recvfrom(1518)
-
             #print(data.decode(encoding="utf-8"))
+
             return "Succes"
         except:
             return "Did not work"
@@ -33,12 +34,12 @@ class Drone(object):
 
     def takeOff(self):
         print("takeOff")
-        resultat = self.sendBesked("takeOff")
+        resultat = self.sendBesked("takeoff")
         print(resultat)
 
     def forward(self, value):
         print("frem "+value)
-        resultat = self.sendBesked("foward "+value)
+        resultat = self.sendBesked("forward "+value)
         print(resultat)
 
     def back(self, value):
